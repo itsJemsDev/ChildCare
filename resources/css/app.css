@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@source "../../app/Views";
+
+@theme {
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-800: #166534;
+  --color-brand-900: #14532d;
+  --color-accent: #1d4ed8;
+  --color-parent-600: #7c3aed;
+  --color-parent-700: #6d28d9;
+  --color-parent-800: #5b21b6;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@font-face { font-family: Inter; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/inter-latin-400.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-style: normal; font-weight: 500; font-display: swap; src: url("/assets/fonts/inter-latin-500.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-style: normal; font-weight: 600; font-display: swap; src: url("/assets/fonts/inter-latin-600.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-style: normal; font-weight: 700; font-display: swap; src: url("/assets/fonts/inter-latin-700.woff2") format("woff2"); }
+
+@layer base {
+  body { @apply bg-gray-50 font-sans text-gray-900 antialiased; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-brand-700; }
+  [x-cloak] { display: none !important; }
+}
+
+@layer components {
+  .card { @apply rounded-xl border border-gray-200 bg-white shadow-sm; }
+  .btn-primary { @apply inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-800 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-900; }
+  .btn-accent { @apply inline-flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800; }
+  .btn-muted { @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50; }
+  .form-label { @apply mb-1 block text-sm font-medium text-gray-700; }
+  .form-control { @apply min-h-11 w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600; }
+}
+
+@layer utilities {
+  .scrollbar-hidden { scrollbar-width: none; -ms-overflow-style: none; }
+  .scrollbar-hidden::-webkit-scrollbar { display: none; }
+}

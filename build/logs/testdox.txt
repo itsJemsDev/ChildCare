@@ -1,0 +1,22 @@
+Example Session
+ [x] Session simple
+
+Health
+ [x] Is defined app path
+ [x] Base url has been set
+
+Health Rules
+ [x] Lms median has zero z score
+ [x] Lms two standard deviations has expected score
+ [x] Growth age transitions use calendar anniversaries
+ [x] Restricted lms adjustment is continuous at three sd
+ [x] Restricted lms adjustment handles low tail
+ [x] Malnutrition takes precedence when obesity flag also applies
+ [x] Bmi overweight uses bmi specific threshold
+ [x] Growth classification honors watch and clinical boundaries
+ [x] Immunization next due date uses recommended age or minimum interval
+ [x] Immunization display statuses use date boundaries
+ [x] Immunization child status boundaries
+ [x] Phone normalization accepts philippine formats
+ [x] Sms segments respect unicode concatenation limits
+

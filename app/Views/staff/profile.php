@@ -1,0 +1,4 @@
+<?= $this->extend('layouts/staff') ?>
+<?= $this->section('content') ?>
+<div class="max-w-2xl rounded-xl border bg-white p-6"><h1 class="text-2xl font-semibold">Profile Settings</h1><dl class="mt-5 grid grid-cols-2 gap-4 text-sm"><dt class="text-gray-500">Username</dt><dd><?= esc($user->username??'') ?></dd><dt class="text-gray-500">Name</dt><dd><?= esc(trim(($user->first_name??'').' '.($user->last_name??''))) ?></dd><dt class="text-gray-500">Email</dt><dd><?= esc($user->email??'Not set') ?></dd><dt class="text-gray-500">Mobile</dt><dd><?= esc($user->mobile_no??'Not set') ?></dd><dt class="text-gray-500">Role</dt><dd><?= esc(implode(', ',$user->getGroups())) ?></dd></dl><p class="mt-5 text-sm text-gray-600">To change your account details, contact an administrator.</p></div>
+<?= $this->endSection() ?>

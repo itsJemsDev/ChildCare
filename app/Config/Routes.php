@@ -1,0 +1,132 @@
+<?php
+
+use CodeIgniter\Router\RouteCollection;
+
+/** @var RouteCollection $routes */
+$routes->get('/', 'Auth\AuthController::login');
+$routes->get('login', 'Auth\AuthController::login', ['as' => 'login']);
+$routes->post('login', 'Auth\AuthController::attempt');
+$routes->get('login/sms', 'Auth\AuthController::smsForm');
+$routes->post('login/sms', 'Auth\AuthController::requestSmsCode');
+$routes->get('login/sms/verify', 'Auth\AuthController::verifySmsForm');
+$routes->post('login/sms/verify', 'Auth\AuthController::verifySms');
+$routes->post('auth/a/resend', 'Auth\AuthController::resendStaff2fa');
+$routes->get('forgot-password', 'Auth\AuthController::forgot');
+$routes->post('forgot-password', 'Auth\AuthController::sendResetCode');
+$routes->get('reset-password', 'Auth\AuthController::resetForm');
+$routes->post('reset-password', 'Auth\AuthController::resetPassword');
+$routes->get('contact-admin', 'Auth\AuthController::contact');
+$routes->get('privacy', static fn() => view('privacy', ['title' => 'Privacy Notice']));
+$routes->get('logout', 'Auth\AuthController::logout', ['filter' => 'session']);
+$routes->post('logout', 'Auth\AuthController::logout', ['filter' => 'session']);
+$routes->get('account/set-password', 'Auth\AuthController::setPassword', ['filter' => 'session']);
+$routes->post('account/set-password', 'Auth\AuthController::savePassword', ['filter' => 'session']);
+
+service('auth')->routes($routes, ['only' => ['auth-actions']]);
+
+$staffFilters = ['session', 'group:admin,bhw', 'forcePassword', 'idleTimeout'];
+$routes->group('', ['filter' => $staffFilters], static function (RouteCollection $routes): void {
+    $routes->get('dashboard', 'Staff\Dashboard::index');
+    $routes->get('children', 'Staff\Children::index');
+    $routes->get('children/export.xlsx', 'Staff\Children::export');
+    $routes->get('children/new', 'Staff\Children::new');
+    $routes->post('children', 'Staff\Children::create');
+    $routes->get('children/(:num)', 'Staff\Children::show/$1');
+    $routes->get('children/(:num)/edit', 'Staff\Children::edit/$1');
+    $routes->get('children/(:num)/photo', 'Staff\Documents::photo/$1');
+    $routes->post('children/(:num)/update', 'Staff\Children::update/$1');
+    $routes->post('children/(:num)/delete', 'Staff\Children::delete/$1');
+    $routes->get('children/(:num)/immunizations', 'Staff\Immunizations::index/$1');
+    $routes->post('children/(:num)/immunizations', 'Staff\Immunizations::create/$1');
+    $routes->post('children/(:num)/immunizations/(:num)/update', 'Staff\Immunizations::update/$1/$2');
+    $routes->post('children/(:num)/immunizations/(:num)/delete', 'Staff\Immunizations::delete/$1/$2');
+    $routes->get('children/(:num)/growth', 'Staff\Growth::index/$1');
+    $routes->post('children/(:num)/growth', 'Staff\Growth::create/$1');
+    $routes->post('children/(:num)/growth/(:num)/delete', 'Staff\Growth::delete/$1/$2');
+    $routes->get('children/(:num)/growth/preview.json', 'Staff\Growth::preview/$1');
+    $routes->get('children/(:num)/growth/chart.json', 'Staff\Growth::chart/$1');
+    $routes->get('children/(:num)/checkups', 'Staff\Checkups::index/$1');
+    $routes->post('children/(:num)/checkups', 'Staff\Checkups::create/$1');
+    $routes->post('children/(:num)/checkups/(:num)/update', 'Staff\Checkups::update/$1/$2');
+    $routes->post('children/(:num)/checkups/(:num)/delete', 'Staff\Checkups::delete/$1/$2');
+    $routes->get('children/(:num)/documents/(:num)', 'Staff\Documents::show/$1/$2');
+    $routes->post('children/(:num)/documents/(:num)/verify', 'Staff\Documents::verify/$1/$2');
+    $routes->post('children/(:num)/documents/(:num)/reject', 'Staff\Documents::reject/$1/$2');
+    $routes->get('registrations/pending', 'Staff\Children::pending');
+    $routes->post('registrations/(:num)/verify', 'Staff\Children::verify/$1');
+    $routes->post('registrations/(:num)/reject', 'Staff\Children::reject/$1');
+    $routes->get('schedules', 'Staff\Schedules::index');
+    $routes->get('schedules/export/(:segment)', 'Staff\Schedules::export/$1');
+    $routes->post('schedules/remind-selected', 'Staff\Schedules::remindSelected');
+    $routes->get('sms', 'Staff\Sms::compose');
+    $routes->get('sms/recipients/count.json', 'Staff\Sms::countRecipients');
+    $routes->post('sms', 'Staff\Sms::queue');
+    $routes->get('sms/logs', 'Staff\Sms::logs');
+    $routes->post('sms/messages/(:num)/retry', 'Staff\Sms::retry/$1');
+    $routes->get('sms/import', 'Staff\Sms::importContacts');
+    $routes->post('sms/import', 'Staff\Sms::processContacts');
+    $routes->get('sms/templates', 'Staff\Sms::templates');
+    $routes->post('sms/templates', 'Staff\Sms::saveTemplate');
+    $routes->post('sms/templates/(:num)', 'Staff\Sms::updateTemplate/$1');
+    $routes->post('sms/templates/(:num)/delete', 'Staff\Sms::deleteTemplate/$1');
+    $routes->get('reports', 'Staff\Reports::index');
+    $routes->get('reports/data/(:segment).json', 'Staff\Reports::data/$1');
+    $routes->get('reports/export/(:segment).(:segment)', 'Staff\Reports::export/$1/$2');
+    $routes->post('reports/export/(:segment).(:segment)', 'Staff\Reports::export/$1/$2');
+    $routes->get('notifications', 'Staff\Notifications::index');
+    $routes->post('notifications/(:num)/read', 'Staff\Notifications::read/$1');
+    $routes->get('profile', 'Staff\Profile::index');
+    $routes->get('users', 'Staff\Users::index');
+    $routes->get('users/new', 'Staff\Users::new');
+    $routes->get('users/(:num)/edit', 'Staff\Users::edit/$1');
+    $routes->post('users', 'Staff\Users::create');
+    $routes->post('users/(:num)/update', 'Staff\Users::update/$1');
+    $routes->post('users/(:num)/toggle', 'Staff\Users::toggle/$1');
+    $routes->post('users/(:num)/reset-access', 'Staff\Users::resetAccess/$1');
+    $routes->get('appointments', 'Staff\Appointments::index');
+    $routes->post('appointments/(:num)/(:segment)', 'Staff\Appointments::update/$1/$2');
+});
+
+$routes->group('', ['filter' => ['session', 'group:admin', 'forcePassword', 'idleTimeout']], static function (RouteCollection $routes): void {
+    $routes->get('settings', 'Staff\Settings::index');
+    $routes->post('settings', 'Staff\Settings::save');
+    $routes->post('settings/puroks', 'Staff\Settings::savePurok');
+    $routes->post('settings/puroks/(:num)', 'Staff\Settings::updatePurok/$1');
+    $routes->post('settings/puroks/(:num)/toggle', 'Staff\Settings::togglePurok/$1');
+    $routes->post('settings/vaccines', 'Staff\Settings::saveVaccine');
+    $routes->post('settings/vaccines/(:num)', 'Staff\Settings::updateVaccine/$1');
+    $routes->post('settings/vaccines/doses', 'Staff\Settings::saveDose');
+    $routes->post('settings/vaccines/doses/(:num)', 'Staff\Settings::updateDose/$1');
+    $routes->post('settings/backup', 'Staff\Settings::backup');
+    $routes->get('settings/backup/(:segment)', 'Staff\Settings::downloadBackup/$1');
+});
+
+$parentFilters = ['session', 'group:parent', 'forcePassword', 'idleTimeout'];
+$routes->group('parent', ['filter' => $parentFilters], static function (RouteCollection $routes): void {
+    $routes->get('dashboard', 'Parent\Portal::dashboard');
+    $routes->get('children', 'Parent\Portal::children');
+    $routes->get('children/new', 'Parent\Portal::newChild');
+    $routes->post('children', 'Parent\Portal::submitChild');
+    $routes->get('children/(:num)', 'Parent\Portal::child/$1');
+    $routes->get('children/(:num)/photo', 'Parent\Portal::photo/$1');
+    $routes->get('children/(:num)/documents/(:num)', 'Parent\Portal::document/$1/$2');
+    $routes->get('children/(:num)/records.pdf', 'Parent\Portal::pdf/$1');
+    $routes->get('immunizations', 'Parent\Portal::immunizations');
+    $routes->post('immunizations/(:num)/reminder', 'Parent\Portal::setDoseReminder/$1');
+    $routes->get('growth', 'Parent\Portal::growth');
+    $routes->get('medical-history', 'Parent\Portal::medicalHistory');
+    $routes->get('notifications', 'Parent\Portal::notifications');
+    $routes->post('notifications/(:num)/read', 'Parent\Portal::readNotification/$1');
+    $routes->get('appointments', 'Parent\Portal::appointments');
+    $routes->post('appointments', 'Parent\Portal::requestAppointment');
+    $routes->get('documents', 'Parent\Portal::documents');
+    $routes->post('documents/(:num)', 'Parent\Portal::uploadDocument/$1');
+    $routes->get('profile', 'Parent\Portal::profile');
+    $routes->post('profile', 'Parent\Portal::saveProfile');
+    $routes->post('profile/preferences', 'Parent\Portal::savePreferences');
+    $routes->post('profile/mobile/request', 'Parent\Portal::requestMobileVerification');
+    $routes->post('profile/mobile/verify', 'Parent\Portal::verifyMobile');
+    $routes->post('profile/password', 'Parent\Portal::changePassword');
+});
+
+if (ENVIRONMENT !== 'production') $routes->get('dev/ui', 'Home::styleGuide', ['as' => 'dev-ui']);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/home/jemsdev/ChildCare/phpunit.dist.xml">
+    <testsuite name="App" tests="16" assertions="41" errors="0" failures="0" skipped="0" time="0.137135">
+      <testsuite name="ExampleDatabaseTest" file="/home/jemsdev/ChildCare/tests/database/ExampleDatabaseTest.php" tests="16" assertions="41" errors="0" failures="0" skipped="0" time="0.137135">
+        <testsuite name="ExampleSessionTest" file="/home/jemsdev/ChildCare/tests/session/ExampleSessionTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.053710">
+          <testcase name="testSessionSimple" file="/home/jemsdev/ChildCare/tests/session/ExampleSessionTest.php" line="10" class="ExampleSessionTest" classname="ExampleSessionTest" assertions="1" time="0.053710"/>
+        </testsuite>
+        <testsuite name="HealthRulesTest" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" tests="13" assertions="37" errors="0" failures="0" skipped="0" time="0.058770">
+          <testcase name="testLmsMedianHasZeroZScore" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="15" class="HealthRulesTest" classname="HealthRulesTest" assertions="1" time="0.010566"/>
+          <testcase name="testLmsTwoStandardDeviationsHasExpectedScore" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="20" class="HealthRulesTest" classname="HealthRulesTest" assertions="1" time="0.006348"/>
+          <testcase name="testGrowthAgeTransitionsUseCalendarAnniversaries" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="26" class="HealthRulesTest" classname="HealthRulesTest" assertions="5" time="0.004190"/>
+          <testcase name="testRestrictedLmsAdjustmentIsContinuousAtThreeSd" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="42" class="HealthRulesTest" classname="HealthRulesTest" assertions="1" time="0.004502"/>
+          <testcase name="testRestrictedLmsAdjustmentHandlesLowTail" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="49" class="HealthRulesTest" classname="HealthRulesTest" assertions="1" time="0.006714"/>
+          <testcase name="testMalnutritionTakesPrecedenceWhenObesityFlagAlsoApplies" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="56" class="HealthRulesTest" classname="HealthRulesTest" assertions="3" time="0.005505"/>
+          <testcase name="testBmiOverweightUsesBmiSpecificThreshold" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="64" class="HealthRulesTest" classname="HealthRulesTest" assertions="2" time="0.003433"/>
+          <testcase name="testGrowthClassificationHonorsWatchAndClinicalBoundaries" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="71" class="HealthRulesTest" classname="HealthRulesTest" assertions="7" time="0.002629"/>
+          <testcase name="testImmunizationNextDueDateUsesRecommendedAgeOrMinimumInterval" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="83" class="HealthRulesTest" classname="HealthRulesTest" assertions="2" time="0.005307"/>
+          <testcase name="testImmunizationDisplayStatusesUseDateBoundaries" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="90" class="HealthRulesTest" classname="HealthRulesTest" assertions="4" time="0.002321"/>
+          <testcase name="testImmunizationChildStatusBoundaries" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="99" class="HealthRulesTest" classname="HealthRulesTest" assertions="4" time="0.002088"/>
+          <testcase name="testPhoneNormalizationAcceptsPhilippineFormats" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="108" class="HealthRulesTest" classname="HealthRulesTest" assertions="3" time="0.002072"/>
+          <testcase name="testSmsSegmentsRespectUnicodeConcatenationLimits" file="/home/jemsdev/ChildCare/tests/unit/HealthRulesTest.php" line="115" class="HealthRulesTest" classname="HealthRulesTest" assertions="3" time="0.003094"/>
+        </testsuite>
+        <testsuite name="HealthTest" file="/home/jemsdev/ChildCare/tests/unit/HealthTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.024655">
+          <testcase name="testIsDefinedAppPath" file="/home/jemsdev/ChildCare/tests/unit/HealthTest.php" line="12" class="HealthTest" classname="HealthTest" assertions="1" time="0.002797"/>
+          <testcase name="testBaseUrlHasBeenSet" file="/home/jemsdev/ChildCare/tests/unit/HealthTest.php" line="17" class="HealthTest" classname="HealthTest" assertions="2" time="0.021858"/>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

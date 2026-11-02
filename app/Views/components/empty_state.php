@@ -1,0 +1,1 @@
+<div class="card px-6 py-12 text-center"><div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-gray-100 text-xl text-gray-500" aria-hidden="true">⌕</div><h3 class="mt-4 font-semibold"><?= esc($title ?? 'No records yet') ?></h3><p class="mt-1 text-sm text-gray-500"><?= esc($message ?? 'Records will appear here when they are available.') ?></p></div>

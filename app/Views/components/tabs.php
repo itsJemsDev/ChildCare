@@ -1,0 +1,1 @@
+<nav class="flex gap-1 overflow-x-auto border-b border-gray-200" role="tablist"><?php foreach (($tabs ?? []) as $tab): ?><a class="min-h-11 shrink-0 border-b-2 border-transparent px-4 py-3 text-sm text-gray-600 hover:border-brand-600 hover:text-brand-800" href="<?= esc($tab['href'] ?? '#') ?>"><?= esc($tab['label'] ?? '') ?></a><?php endforeach ?></nav>

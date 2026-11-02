@@ -1,0 +1,1 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title><?= esc($title ?? 'Child record') ?></title><style>body{font-family:DejaVu Sans,sans-serif;color:#111827;font-size:12px}h1{color:#14532d}table{width:100%;border-collapse:collapse}td,th{border:1px solid #d1d5db;padding:8px}</style></head><body><?= $this->renderSection('content') ?></body></html>

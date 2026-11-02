@@ -1,0 +1,1 @@
+<div class="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600"><span>Showing <?= esc((string) ($from ?? 0)) ?> to <?= esc((string) ($to ?? 0)) ?> of <?= esc((string) ($total ?? 0)) ?> records</span><nav class="flex gap-2" aria-label="Pagination"><a class="btn-muted" href="#">Previous</a><a class="btn-muted" href="#">Next</a></nav></div>
